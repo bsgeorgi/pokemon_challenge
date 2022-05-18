@@ -26,6 +26,7 @@ namespace pokemon_challenge
             });
             services.AddHttpClient();
             services.AddTransient<ITranslationService, TranslationService>();
+            services.AddTransient<IPokemonService, PokemonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

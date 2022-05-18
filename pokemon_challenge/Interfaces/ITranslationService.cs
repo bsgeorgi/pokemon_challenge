@@ -5,6 +5,6 @@ namespace pokemon_challenge.Services
 {
     public interface ITranslationService
     {
-        Task<TranslationModel> GetTranslationAsync(string text);
+        Task<TranslationModel> GetTranslationAsync(string text, string translation);
     }
 }
