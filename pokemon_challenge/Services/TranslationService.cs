@@ -17,36 +17,14 @@ namespace pokemon_challenge.Services
             _httpClientFactory = httpClientFactory;
         }
 
-        public async Task<TranslationObject> GetYodaTranslationObjectAsync(string text)
+        public async Task<TranslationModel> GetTranslationAsync(string text, string translation)
         {
-            var uri = $"{apiBasePath}/yoda";
-            var httpClient = _httpClientFactory.CreateClient();
-
-            var data = new Dictionary<string, string>
+            if (string.IsNullOrEmpty(translation) || translation != "yoda" || translation != "shakespeare")
             {
-                { "text", text }
-            };
-
-            var content = new FormUrlEncodedContent(data);
-            var response = await httpClient.PostAsync(uri, content);
-
-            if (response.IsSuccessStatusCode)
-            {
-                var responseString = await response.Content.ReadAsStringAsync();
-                if (string.IsNullOrEmpty(responseString))
-                {
-                    return null;
-                }
-
-                return JsonConvert.DeserializeObject<TranslationObject>(responseString);
+                return null;
             }
 
-            return null;
-        }
-
-        public async Task<TranslationObject> GetShakespeareTranslationObjectAsync(string text)
-        {
-            var uri = $"{apiBasePath}/shakespeare";
+            var uri = $"{apiBasePath}/{translation}";
             var httpClient = _httpClientFactory.CreateClient();
 
             var data = new Dictionary<string, string>
@@ -65,7 +43,7 @@ namespace pokemon_challenge.Services
                     return null;
                 }
 
-                return JsonConvert.DeserializeObject<TranslationObject>(responseString);
+                return JsonConvert.DeserializeObject<TranslationModel>(responseString);
             }
 
             return null;

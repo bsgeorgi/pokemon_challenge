@@ -1,6 +1,6 @@
 ﻿namespace pokemon_challenge.Models
 {
-    public class TranslationObject
+    public class TranslationModel
     {
         public Success success { get; set; }
         public Contents contents { get; set; }
