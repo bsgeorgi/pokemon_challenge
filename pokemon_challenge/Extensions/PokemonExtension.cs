@@ -1,10 +1,12 @@
-﻿using pokemon_challenge.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+using pokemon_challenge.Models;
 using System.Text.RegularExpressions;
 
 namespace pokemon_challenge.Extensions
 {
     public static class PokemonExtension
     {
+        [ExcludeFromCodeCoverage]
         public static FormattedPokemonModel Beautified(this PokemonModel pokemonModel)
         {
             var description = pokemonModel.flavor_text_entries.Count > 0
