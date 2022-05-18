@@ -28,7 +28,33 @@ namespace pokemon_challenge.Services
             };
 
             var content = new FormUrlEncodedContent(data);
+            var response = await httpClient.PostAsync(uri, content);
 
+            if (response.IsSuccessStatusCode)
+            {
+                var responseString = await response.Content.ReadAsStringAsync();
+                if (string.IsNullOrEmpty(responseString))
+                {
+                    return null;
+                }
+
+                return JsonConvert.DeserializeObject<TranslationObject>(responseString);
+            }
+
+            return null;
+        }
+
+        public async Task<TranslationObject> GetShakespeareTranslationObjectAsync(string text)
+        {
+            var uri = $"{apiBasePath}/shakespeare";
+            var httpClient = _httpClientFactory.CreateClient();
+
+            var data = new Dictionary<string, string>
+            {
+                { "text", text }
+            };
+
+            var content = new FormUrlEncodedContent(data);
             var response = await httpClient.PostAsync(uri, content);
 
             if (response.IsSuccessStatusCode)

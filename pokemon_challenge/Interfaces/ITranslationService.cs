@@ -6,5 +6,6 @@ namespace pokemon_challenge.Services
     public interface ITranslationService
     {
         Task<TranslationObject> GetYodaTranslationObjectAsync(string text);
+        Task<TranslationObject> GetShakespeareTranslationObjectAsync(string text);
     }
 }
