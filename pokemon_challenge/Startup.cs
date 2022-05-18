@@ -25,6 +25,10 @@ namespace pokemon_challenge
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Pokemon Challenge Web Api" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +38,12 @@ namespace pokemon_challenge
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            var swaggerOptions = new SwaggerOptions();
+            Configuration.GetSection(nameof(SwaggerOptions)).Bind(swaggerOptions);
+
+            app.UseSwagger(o => o.RouteTemplate = swaggerOptions.JsonRoute);
+            app.UseSwaggerUI(o => o.SwaggerEndpoint(swaggerOptions.UIEndpoint, swaggerOptions.Description));
 
             app.UseRouting();
 
