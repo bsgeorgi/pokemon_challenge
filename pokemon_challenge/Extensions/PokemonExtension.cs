@@ -10,12 +10,14 @@ namespace pokemon_challenge.Extensions
         public static FormattedPokemonModel Beautified(this PokemonModel pokemonModel)
         {
             var description = pokemonModel.flavor_text_entries.Count > 0
-                                ? pokemonModel.flavor_text_entries.Find(i => i.language.name == "en").flavor_text
+                                ? pokemonModel.flavor_text_entries.Find(i => i.language.name == "en")?.flavor_text
                                 : "";
 
-            string filteredDescription = Regex.Replace(description, "[^a-zA-Z0-9_.]+", " ", RegexOptions.Compiled);
+            var filteredDescription = string.IsNullOrEmpty(description)
+                                        ? string.Empty
+                                        : Regex.Replace(description, "[^a-zA-Z0-9_.]+", " ", RegexOptions.Compiled);
 
-            var _habitat = pokemonModel.habitat != null
+            var habitat = pokemonModel.habitat != null
                             ? pokemonModel.habitat.name.Trim()
                             : string.Empty;
 
@@ -23,7 +25,7 @@ namespace pokemon_challenge.Extensions
             {
                 name = pokemonModel.name,
                 description = filteredDescription,
-                habitat = _habitat,
+                habitat = habitat,
                 isLegendary = pokemonModel.is_legendary
             };
         }
