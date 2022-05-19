@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
-using pokemon_challenge.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using pokemon_challenge.Models;
 
 namespace pokemon_challenge.Services
 {
@@ -12,7 +12,7 @@ namespace pokemon_challenge.Services
         private readonly IHttpClientFactory _httpClientFactory;
 
         private const string ApiBasePath = "https://api.funtranslations.com/translate";
-        private readonly string[] _allowedTranslations = new string[] { "shakespeare", "yoda" };
+        private readonly string[] _allowedTranslations = { "shakespeare", "yoda" };
 
         public TranslationService(IHttpClientFactory httpClientFactory)
         {
@@ -40,10 +40,11 @@ namespace pokemon_challenge.Services
             if (!response.IsSuccessStatusCode) return null;
 
             var responseString = await response.Content.ReadAsStringAsync();
-            
-            return string.IsNullOrEmpty(responseString)
+            var jsonResult = JsonConvert.DeserializeObject(responseString)?.ToString();
+
+            return string.IsNullOrEmpty(jsonResult)
                 ? null
-                : JsonConvert.DeserializeObject<TranslationModel>(responseString);
+                : JsonConvert.DeserializeObject<TranslationModel>(jsonResult);
         }
     }
 }
