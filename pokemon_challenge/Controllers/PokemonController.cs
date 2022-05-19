@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using pokemon_challenge.Models;
-using pokemon_challenge.Services;
 using System.Threading.Tasks;
 using System.Web.Http.Description;
+using pokemon_challenge.Interfaces;
 
 namespace pokemon_challenge.Controllers
 {

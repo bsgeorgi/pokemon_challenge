@@ -1,7 +1,7 @@
 ﻿using pokemon_challenge.Models;
 using System.Threading.Tasks;
 
-namespace pokemon_challenge.Services
+namespace pokemon_challenge.Interfaces
 {
     public interface ITranslationService
     {

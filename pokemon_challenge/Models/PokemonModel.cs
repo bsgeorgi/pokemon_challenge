@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
 
 namespace pokemon_challenge.Models
 {
+    [ExcludeFromCodeCoverage]
     public class PokemonModel
     {
         [JsonIgnore]
@@ -82,6 +82,7 @@ namespace pokemon_challenge.Models
         public List<Variety> varieties { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class FormattedPokemonModel
     {
         public string name { get; set; }
@@ -93,35 +94,41 @@ namespace pokemon_challenge.Models
         public bool isLegendary { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Color
     {
         public string name { get; set; }
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Habitat
     {
         public string name { get; set; }
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class EggGroup
     {
         public string name { get; set; }
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class EvolutionChain
     {
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class EvolvesFromSpecies
     {
         public string name { get; set; }
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class FlavorTextEntry
     {
         public string flavor_text { get; set; }
@@ -129,72 +136,84 @@ namespace pokemon_challenge.Models
         public Version version { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class FormDescription
     {
         public string description { get; set; }
         public Language language { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Genera
     {
         public string genus { get; set; }
         public Language language { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Generation
     {
         public string name { get; set; }
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class GrowthRate
     {
         public string name { get; set; }
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Language
     {
         public string name { get; set; }
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Name
     {
         public string name { get; set; }
         public Language language { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Pokedex
     {
         public string name { get; set; }
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class PokedexNumber
     {
         public int entry_number { get; set; }
         public Pokedex pokedex { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Pokemon
     {
         public string name { get; set; }
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Shape
     {
         public string name { get; set; }
         public string url { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Variety
     {
         public bool is_default { get; set; }
         public Pokemon pokemon { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public class Version
     {
         public string name { get; set; }

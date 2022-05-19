@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using pokemon_challenge.Interfaces;
 using pokemon_challenge.Models;
 
 namespace pokemon_challenge.Services

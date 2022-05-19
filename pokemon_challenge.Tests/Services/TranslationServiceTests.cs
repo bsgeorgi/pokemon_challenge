@@ -65,7 +65,7 @@ namespace pokemon_challenge.Tests.Services
 
             const string expectedTranslation =
                 "Created by a scientist after years of horrific gene splicing and dna engineering experiments,  it was.";
-
+            
             result.ShouldSatisfyAllConditions(
                 () => result.ShouldNotBeNull(),
                 () => result.ShouldBeOfType<TranslationModel>(),

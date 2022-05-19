@@ -5,6 +5,7 @@ using pokemon_challenge.Models;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using pokemon_challenge.Interfaces;
 
 namespace pokemon_challenge.Services
 {
@@ -23,7 +24,7 @@ namespace pokemon_challenge.Services
             _translationService = translationService;
         }
 
-        private async Task<PokemonModel> GetPokemonDescriptionAsync(string pokemonName)
+        public async Task<PokemonModel> RetrievePokemonDataAsync(string pokemonName)
         {
             var uri = $"{ApiBasePath}/{pokemonName}";
             var httpClient = _httpClientFactory.CreateClient();
@@ -32,25 +33,25 @@ namespace pokemon_challenge.Services
             if (!response.IsSuccessStatusCode) return null;
 
             var responseString = await response.Content.ReadAsStringAsync();
+            var jsonResult = JsonConvert.DeserializeObject(responseString)?.ToString();
 
-            return string.IsNullOrEmpty(responseString)
+            return string.IsNullOrEmpty(jsonResult)
                 ? null
-                : JsonConvert.DeserializeObject<PokemonModel>(responseString);
+                : JsonConvert.DeserializeObject<PokemonModel>(jsonResult);
         }
 
         public async Task<FormattedPokemonModel> GetBasicPokemonAsync(string pokemonName)
         {
-            var pokemonModel = await GetPokemonDescriptionAsync(pokemonName);
+            var pokemonModel = await RetrievePokemonDataAsync(pokemonName);
             return pokemonModel?.Beautified();
         }
-
 
         public async Task<FormattedPokemonModel> GetTranslatedPokemonAsync(string pokemonName)
         {
             // If the Pokemon’s habitat is cave or it’s a legendary Pokemon then apply the Yoda translation.
             // For all other Pokemon, apply the Shakespeare translation.
 
-            var pokemonModel = await GetPokemonDescriptionAsync(pokemonName);
+            var pokemonModel = await RetrievePokemonDataAsync(pokemonName);
             TranslationModel translationModel;
 
             if (pokemonModel == null)

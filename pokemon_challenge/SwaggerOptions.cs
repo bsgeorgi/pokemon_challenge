@@ -1,5 +1,8 @@
-﻿namespace pokemon_challenge
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace pokemon_challenge
 {
+    [ExcludeFromCodeCoverage]
     public class SwaggerOptions
     {
         public string JsonRoute { get; set; }
