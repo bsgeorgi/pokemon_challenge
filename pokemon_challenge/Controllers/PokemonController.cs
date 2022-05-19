@@ -11,12 +11,10 @@ namespace pokemon_challenge.Controllers
     [Route("[controller]")]
     public class PokemonController : ControllerBase
     {
-        private readonly ILogger<PokemonController> _logger;
         private readonly IPokemonService _pokemonService;
 
-        public PokemonController(ILogger<PokemonController> logger, IPokemonService pokemonService)
+        public PokemonController(IPokemonService pokemonService)
         {
-            _logger = logger;
             _pokemonService = pokemonService;
         }
 
