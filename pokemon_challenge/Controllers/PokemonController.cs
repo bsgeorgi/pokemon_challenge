@@ -25,7 +25,7 @@ namespace pokemon_challenge.Controllers
         [ResponseType(typeof(TranslationModel))]
         public async Task<IActionResult> GetBasicPokemon(string pokemonName)
         {
-            var pokemonModel = await _pokemonService.GetBasicPokemonAsybc(pokemonName);
+            var pokemonModel = await _pokemonService.GetBasicPokemonAsync(pokemonName);
             if (pokemonModel == null)
             {
                 return NotFound();
