@@ -11,8 +11,8 @@ namespace pokemon_challenge.Services
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        private const string apiBasePath = "https://api.funtranslations.com/translate";
-        private string[] allowedTranslations = new string[] { "shakespeare", "yoda" };
+        private const string ApiBasePath = "https://api.funtranslations.com/translate";
+        private readonly string[] _allowedTranslations = new string[] { "shakespeare", "yoda" };
 
         public TranslationService(IHttpClientFactory httpClientFactory)
         {
@@ -21,12 +21,12 @@ namespace pokemon_challenge.Services
 
         public async Task<TranslationModel> GetTranslationAsync(string text, string translation)
         {
-            if (string.IsNullOrEmpty(translation) || !allowedTranslations.Any(translation.Contains))
+            if (string.IsNullOrEmpty(translation) || !_allowedTranslations.Any(translation.Contains))
             {
                 return null;
             }
 
-            var uri = $"{apiBasePath}/{translation}";
+            var uri = $"{ApiBasePath}/{translation}";
             var httpClient = _httpClientFactory.CreateClient();
 
             var data = new Dictionary<string, string>
@@ -37,18 +37,13 @@ namespace pokemon_challenge.Services
             var content = new FormUrlEncodedContent(data);
             var response = await httpClient.PostAsync(uri, content);
 
-            if (response.IsSuccessStatusCode)
-            {
-                var responseString = await response.Content.ReadAsStringAsync();
-                if (string.IsNullOrEmpty(responseString))
-                {
-                    return null;
-                }
+            if (!response.IsSuccessStatusCode) return null;
 
-                return JsonConvert.DeserializeObject<TranslationModel>(responseString);
-            }
-
-            return null;
+            var responseString = await response.Content.ReadAsStringAsync();
+            
+            return string.IsNullOrEmpty(responseString)
+                ? null
+                : JsonConvert.DeserializeObject<TranslationModel>(responseString);
         }
     }
 }
